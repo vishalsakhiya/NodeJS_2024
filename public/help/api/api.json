@@ -1,0 +1,659 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "USER AUTH",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://{{baseurl}}"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ],
+    "tags": [
+        {
+            "name": "Auth"
+        },
+        {
+            "name": "USER"
+        },
+        {
+            "name": "USER EXPERIENCE"
+        },
+        {
+            "name": "USER EDUCATION"
+        }
+    ],
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "LOGIN",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "app.test1e309@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "integer",
+                                        "example": "12345678"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/change-password": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "CAHANGE PASSWORD",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "old_password": {
+                                        "type": "integer",
+                                        "example": "123456"
+                                    },
+                                    "new_password": {
+                                        "type": "integer",
+                                        "example": "12345678"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/forgot-password": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "FORGOT PASSWORD",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "app.test1e309@gmail.com"
+                                    },
+                                    "new_password": {
+                                        "type": "integer",
+                                        "example": "123456"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/user/": {
+            "get": {
+                "tags": [
+                    "USER"
+                ],
+                "summary": "GET ALL USER",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "USER"
+                ],
+                "summary": "CREATE USER",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "app.test1e309@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "integer",
+                                        "example": "123456"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "example": "student"
+                                    },
+                                    "firstName": {
+                                        "type": "string",
+                                        "example": "APP"
+                                    },
+                                    "lastName": {
+                                        "type": "string",
+                                        "example": "TEst"
+                                    },
+                                    "gender": {
+                                        "type": "string",
+                                        "example": "male"
+                                    },
+                                    "phone": {
+                                        "type": "integer",
+                                        "example": "74563212"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
+                                    "countryId": {
+                                        "type": "integer",
+                                        "example": "5"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/user/{id}": {
+            "get": {
+                "tags": [
+                    "USER"
+                ],
+                "summary": "GET USER",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "example": "3"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "USER"
+                ],
+                "summary": "UPDATE USER",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "bio": {
+                                        "type": "string",
+                                        "example": "KLA"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
+                                    "countryId": {
+                                        "type": "integer",
+                                        "example": "3"
+                                    },
+                                    "": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "USER"
+                ],
+                "summary": "DELETE USER",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/user-experience/": {
+            "get": {
+                "tags": [
+                    "USER EXPERIENCE"
+                ],
+                "summary": "GET ALL USER EXPERIENCE",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "USER EXPERIENCE"
+                ],
+                "summary": "CREATE USER EXPERIENCE",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "userId": 3,
+                                    "jobTitle": "Full Stack Developer",
+                                    "employer": "Qodors Technologies",
+                                    "description": "Node JS, React JS, MYSQl, MongoDB, ",
+                                    "startDate": "2022-12-06"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/user-experience/{id}": {
+            "get": {
+                "tags": [
+                    "USER EXPERIENCE"
+                ],
+                "summary": "GET USER EXPERIENCE",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "example": "8"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "USER EXPERIENCE"
+                ],
+                "summary": "UPDATE USER EXPERIENCE",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "jobTitle": "WEB Stack Developer",
+                                    "employer": "Qodors Technologies",
+                                    "description": "Node JS, React JS, MYSQl, MongoDB, ",
+                                    "current": true
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "example": "8"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "USER EXPERIENCE"
+                ],
+                "summary": "DELETE USER EXPERIENCE",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "example": "8"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/user-education": {
+            "get": {
+                "tags": [
+                    "USER EDUCATION"
+                ],
+                "summary": "GET ALL USER EDUCATION",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/user-education/{id}": {
+            "get": {
+                "tags": [
+                    "USER EDUCATION"
+                ],
+                "summary": "GET USER EDUCATION",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "example": "4"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "USER EDUCATION"
+                ],
+                "summary": "UPDATE USER EDUCATION",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "userId": {
+                                        "type": "integer",
+                                        "example": "3"
+                                    },
+                                    "degree": {
+                                        "type": "string",
+                                        "example": "B.Tech(IT)"
+                                    },
+                                    "institute": {
+                                        "type": "string",
+                                        "example": "UTU"
+                                    },
+                                    "startDate": {
+                                        "type": "string",
+                                        "example": "2018-01-05"
+                                    },
+                                    "endDate": {
+                                        "type": "string",
+                                        "example": "2022-12-20"
+                                    },
+                                    "details": {
+                                        "type": "string",
+                                        "example": "Uka Tarsadiya University"
+                                    },
+                                    "current": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "example": "4"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "USER EDUCATION"
+                ],
+                "summary": "DELETE USER EDUCATION",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "example": "3"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/user-education/": {
+            "post": {
+                "tags": [
+                    "USER EDUCATION"
+                ],
+                "summary": "CREATE USER EDUCATION",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "userId": {
+                                        "type": "integer",
+                                        "example": "3"
+                                    },
+                                    "degree": {
+                                        "type": "string",
+                                        "example": "B.Tech"
+                                    },
+                                    "institute": {
+                                        "type": "string",
+                                        "example": "UTU"
+                                    },
+                                    "startDate": {
+                                        "type": "string",
+                                        "example": "2018-08-31"
+                                    },
+                                    "endDate": {
+                                        "type": "string",
+                                        "example": "2022-08-31"
+                                    },
+                                    "details": {
+                                        "type": "string",
+                                        "example": "Uka Tarsadiya University"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
+                                    "current": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  id              Int              @id @default(autoincrement())
+  email           String           @unique(map: "auth_profile_email") @db.VarChar(500)
+  password        String           @db.Text
+  type            users_type
+  firstName       String           @db.Text
+  lastName        String           @db.Text
+  phone           String           @unique(map: "phone") @db.VarChar(18)
+  address         String?          @db.Text
+  pinCode         String?          @db.Text
+  bio             String?          @db.Text
+  gender          users_gender
+  image           String?          @db.Text
+  verified        Boolean          @default(false)
+  facebook        String?          @db.Text
+  twitter         String?          @db.Text
+  linkedin        String?          @db.Text
+  skills          String?          @db.LongText
+  languages       String?          @db.LongText
+  youtube         String?          @db.Text
+  created_at      DateTime         @default(now()) @db.Timestamp(0)
+  updated_at      DateTime?        @default(now()) @db.DateTime(0)
+  userEducation   userEducation[]
+  userExperience  userExperience[]
+}
+
+model userEducation {
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  degree    String    @db.Text
+  institute String    @db.Text
+  startDate DateTime  @db.Date
+  endDate   DateTime? @db.Date
+  details   String?   @db.Text
+  current   Boolean   @default(false)
+  image     String?   @db.Text
+  users     users     @relation(fields: [userId], references: [id], onDelete: Cascade, map: "auth_ue_user")
+
+  @@index([userId], map: "auth_ue_user")
+}
+
+model userExperience {
+  id          Int       @id @default(autoincrement())
+  userId      Int
+  jobTitle    String    @db.Text
+  employer    String    @db.Text
+  description String?   @db.Text
+  startDate   DateTime  @db.Date
+  endDate     DateTime? @db.Date
+  current     Boolean   @default(false)
+  image       String?   @db.Text
+  users       users     @relation(fields: [userId], references: [id], onDelete: Cascade, map: "auth_uex_user")
+
+  @@index([userId], map: "auth_uex_user")
+}
+
+enum users_type {
+  user
+  admin
+}
+
+enum users_gender {
+  male
+  female
+  other
+}
